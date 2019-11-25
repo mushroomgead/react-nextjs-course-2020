@@ -4,6 +4,8 @@ import { useMember } from '@lib/auth'
 import withPage from '@lib/page/withPage'
 import colors from '@features/_ui/colors'
 import AlbumList from './AlbumList'
+import * as AlbumService from '@features/album/services'
+import { Fetch } from '@lib/api'
 
 HomePage.defaultProps = {
   albums: [
@@ -39,7 +41,11 @@ function HomePage({ albums }) {
           New Releases
         </h1>
       </Box>
-      <AlbumList albums={albums} />
+      <Fetch service={() => AlbumService.getNewReleases({ token })}>
+        {({ data }) => {
+          return <AlbumList albums={data.albums.items} />
+        }}
+      </Fetch>
     </Flex>
   )
 }

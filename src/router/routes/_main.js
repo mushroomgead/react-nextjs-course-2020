@@ -14,7 +14,7 @@ const routes = [
     page: 'album-detail',
   },
   {
-    pattern: '/search',
+    pattern: `/search`,
     name: 'search',
     page: 'search',
   },
