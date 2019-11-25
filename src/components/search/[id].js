@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Flex, Box } from '@grid'
 import { useMember } from '@lib/auth'
 import withPage from '@lib/page/withPage'
+import SearchResults from './SearchResults'
+import * as SearchService from '@features/search/services'
+import { get } from 'lodash'
 import { useRouter } from 'next/router'
 
 SearchPage.defaultProps = {
@@ -36,15 +39,28 @@ SearchPage.defaultProps = {
 function SearchPage() {
   const { token } = useMember()
   const [value, setSearchValue] = useState('')
+  const [keyword, setKeyword] = useState([])
   const router = useRouter()
+
+  useEffect(() => {
+    setSearchValue(router.query.id)
+  }, [])
 
   if (token === null) {
     return null
   }
 
   const findWord = async e => {
-    setSearchValue(e.target.value)
-    router.push('/search/[id]', `/search/${e.target.value}`)
+    if (e.target.value) {
+      router.push('/search/[id]', `/search/${e.target.value}`)
+      setSearchValue(e.target.value)
+      let result = await SearchService.getSearchResult(e.target.value, {
+        token,
+      })
+      setKeyword(result)
+    } else {
+      router.push('/search')
+    }
   }
 
   return (
@@ -64,7 +80,17 @@ function SearchPage() {
           onChange={e => findWord(e)}
         />
       </Box>
-      <h1> พิมพ์ค้นหาสิจ๊ะ</h1>
+
+      <SearchResults
+        title="Albums"
+        data={get(keyword, 'albums.items', [])}
+        route="album-detail"
+      />
+      <SearchResults
+        title="Playlists"
+        data={get(keyword, 'playlists.items', [])}
+        route="playlist-detail"
+      />
     </Flex>
   )
 }
