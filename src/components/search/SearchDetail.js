@@ -55,7 +55,9 @@ function SearchPage() {
 
   const findWord = async e => {
     if (e.target.value) {
-      router.push(`/search/:id`, `/search/${e.target.value}`, { shallow: true })
+      router.push(`/search/[id]`, `/search/${e.target.value}`, {
+        shallow: true,
+      })
       setSearchValue(e.target.value)
       let result = await SearchService.getSearchResult(e.target.value, {
         token,

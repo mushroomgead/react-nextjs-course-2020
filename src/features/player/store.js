@@ -21,11 +21,21 @@ export default class PlayerStore {
   }
 
   @observable
-  seekVal = 0
+  seek = {
+    seekVal: 0,
+    isSeeking: false,
+  }
 
   @action
-  setSeekVal(value) {
-    this.seekVal = value
+  setSeekVal(detail) {
+    const { value, isSeeking } = detail
+    this.seek.seekVal = value
+    this.seek.isSeeking = isSeeking
+  }
+
+  @action
+  onSeeking(val) {
+    this.seek.isSeeking = val
   }
 
   @action
@@ -41,7 +51,6 @@ export default class PlayerStore {
   @action
   progress(detail) {
     const { played, playedSeconds } = detail
-
     this.progressBar.timeElapsed = convertSecondsToMinutes(playedSeconds)
     this.progressBar.progress = played
     this.progressBar.duration = '0:30'

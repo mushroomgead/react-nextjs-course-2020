@@ -14,16 +14,17 @@ function ProgressBar({ playerStore }) {
   const [seeking, setSeeking] = useState(false)
 
   const handleSeekMouseDown = e => {
-    setSeeking(true)
+    // console.log('handleSeekMouseDown')
   }
 
   const handleSeekChange = e => {
-    playerStore.setSeekVal(progress)
+    // playerStore.setSeekVal(e.target.value)
+    // playerStore.onSeeking(true)
   }
 
   const handleSeekMouseUp = e => {
-    setSeeking(false)
-
+    playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
+    // playerStore.onSeeking(true)
   }
 
   return (
@@ -78,10 +79,21 @@ function ProgressBar({ playerStore }) {
             max={1}
             step="any"
             value={progress}
-            onClick={() => {}}
-            onMouseDown={handleSeekMouseDown}
-            onChange={handleSeekChange}
-            onMouseUp={handleSeekMouseUp}
+            onClick={e =>
+              playerStore.setSeekVal({
+                value: e.target.value,
+                isSeeking: true,
+              })
+            }
+            onMouseDown={e =>
+              playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
+            }
+            onChange={e =>
+              playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
+            }
+            onMouseUp={e =>
+              playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
+            }
           />
         </div>
       </Box>
