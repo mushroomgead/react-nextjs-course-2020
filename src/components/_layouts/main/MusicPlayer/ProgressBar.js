@@ -64,17 +64,11 @@ function ProgressBar({ playerStore }) {
             max={1}
             step="any"
             value={progress}
-            onClick={e =>
+            onChange={e =>
               playerStore.setSeekVal({
                 value: e.target.value,
                 isSeeking: true,
               })
-            }
-            onMouseDown={e =>
-              playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
-            }
-            onChange={e =>
-              playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
             }
             onMouseUp={e =>
               playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
