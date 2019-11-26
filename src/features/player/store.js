@@ -20,10 +20,17 @@ export default class PlayerStore {
     level: 0.1,
   }
 
+  @observable
+  seekVal = 0
+
   @action
-  adjustVolume(detail) {
-    const { level } = detail
-    this.volume.level = level
+  setSeekVal(value) {
+    this.seekVal = value
+  }
+
+  @action
+  adjustVolume(value) {
+    this.volume.level = value
   }
 
   @action

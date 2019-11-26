@@ -15,10 +15,10 @@ function Player({ playerStore }) {
       progressInterval={50}
       volume={0.8}
       muted={false}
-      onProgress={data => playerStore.progress(data)}
+      seekto={(playerStore.seekVal, 'seconds')}
+      onProgress={detail => playerStore.progress(detail)}
       onEnded={() => {
         playerStore.pause()
-        console.log('onEnded')
       }}
     />
   )

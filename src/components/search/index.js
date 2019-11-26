@@ -43,8 +43,8 @@ function SearchPage() {
   }
 
   const findWord = async e => {
-    setSearchValue(e.target.value)
-    router.push('/search/[id]', `/search/${e.target.value}`)
+    // setSearchValue(e.target.value)
+    router.push('/search/:id', `/search/${e.target.value}`)
   }
 
   return (

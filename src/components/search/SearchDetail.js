@@ -43,7 +43,10 @@ function SearchPage() {
   const router = useRouter()
 
   useEffect(() => {
-    // setSearchValue(router.query.id)
+    setSearchValue(router.query.id)
+    SearchService.getSearchResult(router.query.id, {
+      token,
+    }).then(result => setKeyword(result))
   }, [])
 
   if (token === null) {
@@ -52,7 +55,7 @@ function SearchPage() {
 
   const findWord = async e => {
     if (e.target.value) {
-      router.push('/search/[id]', `/search/${e.target.value}`)
+      router.push(`/search/:id`, `/search/${e.target.value}`, { shallow: true })
       setSearchValue(e.target.value)
       let result = await SearchService.getSearchResult(e.target.value, {
         token,
@@ -95,7 +98,4 @@ function SearchPage() {
   )
 }
 
-SearchPage.getInitialProps = async context => {
-  console.log(context, 'context')
-}
 export default withPage({ restricted: true })(SearchPage)

@@ -14,14 +14,14 @@ const routes = [
     page: 'album-detail',
   },
   {
+    pattern: `/search/:id`,
+    name: 'search-detail',
+    page: 'search-detail',
+  },
+  {
     pattern: `/search`,
     name: 'search',
     page: 'search',
-  },
-  {
-    pattern: `/search/[id]`,
-    name: 'SearchIDPage',
-    page: 'SearchIDPage',
   },
   {
     pattern: '/login',

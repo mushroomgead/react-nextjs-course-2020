@@ -59,7 +59,7 @@ function SoundBar({ playerStore }) {
           <Box>
             <ButtonControl
               icon={playerStore.volume.muted ? 'volume-mute' : 'volume-up'}
-              onClick={() => {}}
+              onClick={() => playerStore.toggleMute()}
             />
           </Box>
           <Box
@@ -108,10 +108,10 @@ function SoundBar({ playerStore }) {
                 max={1}
                 step="any"
                 value={playerStore.volume.level}
-                onClick={() => {}}
-                onMouseDown={() => {}}
-                onChange={() => {}}
-                onMouseUp={() => {}}
+                onClick={e => playerStore.adjustVolume(e.target.value)}
+                onMouseDown={e => playerStore.adjustVolume(e.target.value)}
+                onChange={e => playerStore.adjustVolume(e.target.value)}
+                onMouseUp={e => playerStore.adjustVolume(e.target.value)}
               />
             </div>
           </Box>

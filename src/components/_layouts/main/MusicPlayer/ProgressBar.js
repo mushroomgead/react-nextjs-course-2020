@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Flex, Box } from '@grid'
 import { inject } from '@lib/store'
 
@@ -11,7 +11,20 @@ export default inject('playerStore')(ProgressBar)
 
 function ProgressBar({ playerStore }) {
   const { timeElapsed, progress, duration } = playerStore.progressBar
-  // const { timeElapsed, progress, duration } = props
+  const [seeking, setSeeking] = useState(false)
+
+  const handleSeekMouseDown = e => {
+    setSeeking(true)
+  }
+
+  const handleSeekChange = e => {
+    playerStore.setSeekVal(progress)
+  }
+
+  const handleSeekMouseUp = e => {
+    setSeeking(false)
+
+  }
 
   return (
     <Flex
@@ -66,9 +79,9 @@ function ProgressBar({ playerStore }) {
             step="any"
             value={progress}
             onClick={() => {}}
-            onMouseDown={() => {}}
-            onChange={() => {}}
-            onMouseUp={() => {}}
+            onMouseDown={handleSeekMouseDown}
+            onChange={handleSeekChange}
+            onMouseUp={handleSeekMouseUp}
           />
         </div>
       </Box>
