@@ -34,11 +34,6 @@ export default class PlayerStore {
   }
 
   @action
-  onSeeking(val) {
-    this.seek.isSeeking = val
-  }
-
-  @action
   adjustVolume(value) {
     this.volume.level = value
   }

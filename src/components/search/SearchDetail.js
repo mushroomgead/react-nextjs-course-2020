@@ -46,7 +46,9 @@ function SearchPage() {
     setSearchValue(router.query.id)
     SearchService.getSearchResult(router.query.id, {
       token,
-    }).then(result => setKeyword(result))
+    }).then(result => {
+      setKeyword(result)
+    })
   }, [])
 
   if (token === null) {

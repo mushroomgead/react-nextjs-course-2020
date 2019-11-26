@@ -7,14 +7,11 @@ export default inject('playerStore')(Player)
 function Player({ playerStore }) {
   const { url, playing } = playerStore.nowPlaying
   const playerInst = useRef(null)
-  // console.log(playerInst.current, 'playerInst')
-
-  // playerInst.seekTo(10)
 
   useEffect(() => {
     if (playerStore.seek.isSeeking) {
       playerInst.current.seekTo(playerStore.seek.seekVal)
-      playerStore.onSeeking(false)
+      playerStore.setSeekVal({ isSeeking: false })
     }
   }, [playerStore.seek.isSeeking])
 

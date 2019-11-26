@@ -35,7 +35,6 @@ SearchPage.defaultProps = {
 
 function SearchPage() {
   const { token } = useMember()
-  const [value, setSearchValue] = useState('')
   const router = useRouter()
 
   if (token === null) {
@@ -43,7 +42,6 @@ function SearchPage() {
   }
 
   const findWord = async e => {
-    // setSearchValue(e.target.value)
     router.push('/search/[id]', `/search/${e.target.value}`)
   }
 
@@ -53,7 +51,6 @@ function SearchPage() {
         <input
           type="text"
           autoFocus
-          value={value}
           placeholder="Search for artists, albums or playlists..."
           css={{
             padding: '15px 20px',

@@ -11,21 +11,6 @@ export default inject('playerStore')(ProgressBar)
 
 function ProgressBar({ playerStore }) {
   const { timeElapsed, progress, duration } = playerStore.progressBar
-  const [seeking, setSeeking] = useState(false)
-
-  const handleSeekMouseDown = e => {
-    // console.log('handleSeekMouseDown')
-  }
-
-  const handleSeekChange = e => {
-    // playerStore.setSeekVal(e.target.value)
-    // playerStore.onSeeking(true)
-  }
-
-  const handleSeekMouseUp = e => {
-    playerStore.setSeekVal({ value: e.target.value, isSeeking: true })
-    // playerStore.onSeeking(true)
-  }
 
   return (
     <Flex
