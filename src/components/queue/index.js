@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Flex, Box } from '@grid'
 import { flowRight as compose } from 'lodash'
 import { useMember } from '@lib/auth'
 import withPage from '@lib/page/withPage'
 import colors from '@features/_ui/colors'
+import { inject } from '@lib/store'
 
 import SongList from '@common/SongList'
 
@@ -38,9 +39,17 @@ QueuePage.defaultProps = {
     },
   ],
 }
+export default inject('playerStore')(
+  compose(withPage({ restricted: true }))(QueuePage),
+)
 
-function QueuePage({ tracks }) {
+function QueuePage({ playerStore }) {
   const { token } = useMember()
+  const [list, setList] = useState([])
+
+  useEffect(() => {
+    setList(playerStore.queue.list)
+  }, [playerStore.queue.list])
 
   if (token === null) {
     return null
@@ -59,10 +68,8 @@ function QueuePage({ tracks }) {
         </h1>
       </Box>
       <Box width={1}>
-        <SongList tracks={tracks} />
+        <SongList tracks={list} />
       </Box>
     </Flex>
   )
 }
-
-export default compose(withPage({ restricted: true }))(QueuePage)

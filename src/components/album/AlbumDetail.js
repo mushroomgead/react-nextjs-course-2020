@@ -50,7 +50,7 @@ AlbumDetailPage.defaultProps = {
   },
 }
 
-function AlbumDetailPage({ datza }) {
+function AlbumDetailPage() {
   const { token } = useMember()
   const {
     query: { id },

@@ -26,6 +26,28 @@ export default class PlayerStore {
     isSeeking: false,
   }
 
+  @observable
+  queue = {
+    list: [],
+  }
+
+  @observable
+  shuffle = {
+    list: [],
+    isShuffle: false,
+  }
+
+  @action
+  setQueueList(list) {
+    this.queue.list = [...this.queue.list, list]
+  }
+
+  @action
+  setShuffleList(detail) {
+    this.shuffle.list = []
+    this.shuffle.isShuffle = !this.shuffle.isShuffle
+  }
+
   @action
   setSeekVal(detail) {
     const { value, isSeeking } = detail

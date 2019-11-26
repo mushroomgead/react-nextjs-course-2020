@@ -58,7 +58,11 @@ function ControlPanel({ playerStore }) {
   return (
     <Flex>
       <Box>
-        <ButtonControl icon="random" active={false} onClick={() => {}} />
+        <ButtonControl
+          icon="random"
+          active={playerStore.shuffle.isShuffle}
+          onClick={() => playerStore.setShuffleList()}
+        />
       </Box>
       <Box>
         <ButtonControl icon="step-backward" onClick={() => {}} />
@@ -79,5 +83,3 @@ function ControlPanel({ playerStore }) {
     </Flex>
   )
 }
-
-// export default ControlPanel
