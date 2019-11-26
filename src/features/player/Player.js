@@ -26,7 +26,7 @@ function Player({ playerStore }) {
       muted={false}
       onProgress={detail => playerStore.progress(detail)}
       onEnded={() => {
-        playerStore.pause()
+        playerStore.playPrevNext(+1)
       }}
     />
   )

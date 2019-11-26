@@ -4,6 +4,7 @@ export async function getPlaylistById(id, { token }) {
   const result = await API.getPlaylistById(id, { token })
   const tracks = result.tracks.items.map(v => {
     return {
+      id: v.track.id,
       name: v.track.name,
       artist: v.track.artists[0].name,
       album: v.track.name,

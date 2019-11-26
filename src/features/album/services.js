@@ -8,6 +8,7 @@ export async function getAlbumById(id, { token }) {
   const result = await API.getAlbumById(id, { token })
   const tracks = result.tracks.items.map(v => {
     return {
+      id: v.id,
       name: v.name,
       artist: v.artists[0].name,
       album: v.name,

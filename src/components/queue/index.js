@@ -49,7 +49,7 @@ function QueuePage({ playerStore }) {
 
   useEffect(() => {
     setList(playerStore.queue.list)
-  }, [playerStore.queue.list])
+  }, [playerStore])
 
   if (token === null) {
     return null

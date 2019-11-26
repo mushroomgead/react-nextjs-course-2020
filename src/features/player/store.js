@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx'
 import { convertSecondsToMinutes } from './utilities'
-
+import { shuffle } from 'lodash'
 export default class PlayerStore {
   @observable
   nowPlaying = {
@@ -26,26 +26,47 @@ export default class PlayerStore {
     isSeeking: false,
   }
 
-  @observable
+  @observable.struct
   queue = {
+    original: [],
     list: [],
   }
 
   @observable
   shuffle = {
-    list: [],
     isShuffle: false,
   }
 
   @action
-  setQueueList(list) {
-    this.queue.list = [...this.queue.list, list]
+  playPrevNext(num) {
+    const currentI = this.queue.list.findIndex(
+      v => v.id === this.nowPlaying.currentSong,
+    )
+    const prevI = currentI + num
+    this.play(this.queue.list[prevI])
   }
 
   @action
-  setShuffleList(detail) {
-    this.shuffle.list = []
+  setQueueList(list) {
+    this.queue.original.push(list)
+    this.queue.list = this.queue.original
+    if (this.shuffle.isShuffle) {
+      this.setShuffleList()
+    }
+  }
+
+  @action
+  setShuffleList() {
     this.shuffle.isShuffle = !this.shuffle.isShuffle
+    // shuffle(this.queue.list)
+    if (!this.shuffle.isShuffle) {
+      this.queue.list = this.queue.original
+    }
+    this.queue.list
+      .sort(function() {
+        return Math.round(Math.random()) - 0.5
+      })
+      .slice()
   }
 
   @action
@@ -75,8 +96,9 @@ export default class PlayerStore {
 
   @action
   play(track) {
-    const { previewUrl, name, artist, image } = track
+    const { id, previewUrl, name, artist, image } = track
 
+    this.nowPlaying.currentSong = id
     this.nowPlaying.playing = true
     this.nowPlaying.title = name
     this.nowPlaying.subTitle = artist

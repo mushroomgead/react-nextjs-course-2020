@@ -65,7 +65,12 @@ function ControlPanel({ playerStore }) {
         />
       </Box>
       <Box>
-        <ButtonControl icon="step-backward" onClick={() => {}} />
+        <ButtonControl
+          icon="step-backward"
+          onClick={() => {
+            playerStore.playPrevNext(-1)
+          }}
+        />
       </Box>
       <Box>
         <ButtonControl
@@ -75,7 +80,12 @@ function ControlPanel({ playerStore }) {
         />
       </Box>
       <Box>
-        <ButtonControl icon="step-forward" onClick={() => {}} />
+        <ButtonControl
+          icon="step-forward"
+          onClick={() => {
+            playerStore.playPrevNext(+1)
+          }}
+        />
       </Box>
       <Box>
         <ButtonControl icon="redo-alt" active={false} onClick={() => {}} />
