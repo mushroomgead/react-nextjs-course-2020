@@ -19,6 +19,11 @@ const routes = [
     page: 'search',
   },
   {
+    pattern: `/search/[id]`,
+    name: 'SearchIDPage',
+    page: 'SearchIDPage',
+  },
+  {
     pattern: '/login',
     name: 'login',
     page: 'login',

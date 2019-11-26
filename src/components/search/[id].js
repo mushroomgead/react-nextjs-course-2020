@@ -43,7 +43,7 @@ function SearchPage() {
   const router = useRouter()
 
   useEffect(() => {
-    setSearchValue(router.query.id)
+    // setSearchValue(router.query.id)
   }, [])
 
   if (token === null) {
@@ -95,4 +95,7 @@ function SearchPage() {
   )
 }
 
+SearchPage.getInitialProps = async context => {
+  console.log(context, 'context')
+}
 export default withPage({ restricted: true })(SearchPage)

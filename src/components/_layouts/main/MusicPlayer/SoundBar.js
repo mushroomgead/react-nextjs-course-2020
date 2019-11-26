@@ -3,6 +3,7 @@ import { FontAwesomeIcon as Icon } from '@fortawesome/react-fontawesome'
 import { Flex, Box } from '@grid'
 import colors from '@features/_ui/colors'
 import Link from '@link'
+import { inject } from '@lib/store'
 
 function Button({ icon, onClick, forwardedRef }) {
   const css = {
@@ -39,9 +40,10 @@ SoundBar.defaultProps = {
     level: 0.8,
   },
 }
+export default inject('playerStore')(SoundBar)
 
-function SoundBar(props) {
-  const { volume } = props
+function SoundBar({ playerStore }) {
+  // const { volume } = props
 
   return (
     <Flex justifyContent="flex-end">
@@ -56,7 +58,7 @@ function SoundBar(props) {
           </Box>
           <Box>
             <ButtonControl
-              icon={volume.muted ? 'volume-mute' : 'volume-up'}
+              icon={playerStore.volume.muted ? 'volume-mute' : 'volume-up'}
               onClick={() => {}}
             />
           </Box>
@@ -84,7 +86,7 @@ function SoundBar(props) {
                     borderRadius: '5px',
                   },
                 }}
-                value={volume.level}
+                value={playerStore.volume.level}
                 max={1}
               />
               <input
@@ -105,7 +107,7 @@ function SoundBar(props) {
                 min={0}
                 max={1}
                 step="any"
-                value={volume.level}
+                value={playerStore.volume.level}
                 onClick={() => {}}
                 onMouseDown={() => {}}
                 onChange={() => {}}
@@ -119,4 +121,4 @@ function SoundBar(props) {
   )
 }
 
-export default SoundBar
+// export default SoundBar
